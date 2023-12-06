@@ -1,2 +1,2 @@
 # doxcollege
-an archieve for piblic docs
+An achieve for public docs.
