@@ -2,12 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getDocumentById } from '../services/apiService';
 import { FaCartPlus } from "react-icons/fa";
+import { useAuth } from '../context/AuthContext';
+
 
 const DocumentDetails = () => {
   const { id } = useParams();
   const [documentDetails, setDocumentDetails] = useState({});
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
+  const { userId } = useAuth();
+
 
   useEffect(() => {
     const fetchDocumentDetails = async () => {
@@ -44,6 +48,9 @@ const DocumentDetails = () => {
           <p>Year: {documentDetails.year}</p>
           <p>Price: {documentDetails.price}Rs</p>
           <button><FaCartPlus/></button>
+          <br />
+          <br />
+          {userId === documentDetails.created_by ? <strong style={{ color: "red" }}>Edit</strong> : ""}
         </>
       )}
     </div>

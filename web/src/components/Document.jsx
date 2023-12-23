@@ -1,9 +1,15 @@
 import './styles/style.css';
+import { useAuth } from '../context/AuthContext';
 
-const Document = ({ id, title, year, price }) => {
+const Document = ({ id, title, year, price, created_by }) => {
+  const { userId } = useAuth();
+
   return (
     <div className="document">
-      <p>{title}</p>
+      <p>
+        {title}
+        {userId === created_by ? <strong style={{ color: "red" }}>Edit</strong> : ""}
+      </p>
       <p>{year}</p>
       <p>{price}</p>
     </div>

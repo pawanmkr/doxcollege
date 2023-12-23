@@ -40,6 +40,7 @@ export default function Documents() {
                       title={document.title}
                       year={document.year}
                       price={document.price}
+                      created_by={document.created_by}
                     />
                   </Link>
                 </div>
