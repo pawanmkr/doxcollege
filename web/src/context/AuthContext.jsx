@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer} from 'react';
+import React, { createContext, useContext, useReducer, useEffect } from 'react';
 
 const AuthContext = createContext();
 
@@ -24,10 +24,9 @@ export const AuthProvider = ({ children }) => {
         const parsedID = JSON.parse(atob(payloadBase64));
         const userId = parsedID.userId;
         // Set the cookie when the token is set
-        document.cookie = `jwtToken=${encodeURIComponent(payload)};max-age=${7 * 24 * 60 * 60};path=/`;
+        document.cookie = `jwtToken=${encodeURIComponent(payload)};max-age=${5 * 60};path=/`;
         return { ...state, token: action.payload, userId };
       case 'CLEAR_TOKEN':
-        // Clear the cookie when the token is cleared
         document.cookie = 'jwtToken=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
         return { ...state, token: null, userId: null };
       default:
@@ -35,6 +34,16 @@ export const AuthProvider = ({ children }) => {
     }
   }, initialState);
 
+  // useEffect(() => {
+  //   // If you need to perform any side effect when the token changes, you can do it here
+  //   // For example, you might want to make an authenticated API request
+  //   // const fetchData = async () => {
+  //   //   if (state.token) {
+  //   //     // Make an authenticated API request using state.token
+  //   //   }
+  //   // };
+  //   // fetchData();
+  // }, [state.token]);
 
   const setToken = (newToken) => {
     dispatch({ type: 'SET_TOKEN', payload: newToken });
