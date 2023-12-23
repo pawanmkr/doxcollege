@@ -12,7 +12,6 @@ const Profile = () => {
         const fetchDocuments = async () => {
           try {
             const response = await getProfile(userId);
-            console.log(response.data.docs);
             setDocuments(response.data.docs);
           } catch (error) {
             console.error('Error fetching documents:', error.response.data);
