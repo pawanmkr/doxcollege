@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom'; 
 import { getAllDocuments } from '../services/apiService';
 import Document from './Document';
 import './styles/style.css';
@@ -34,11 +35,14 @@ export default function Documents() {
             <div className="document-list list">
               {documents.map((document) => (
                 <div key={document.id}>
-                  <Document
-                    title={document.title}
-                    year={document.year}
-                    price={document.price}
-                  />
+                  {/* Use Link to navigate to the detailed page */}
+                  <Link to={`/document/${document.id}`}>
+                    <Document
+                      title={document.title}
+                      year={document.year}
+                      price={document.price}
+                    />
+                  </Link>
                 </div>
               ))}
             </div>

@@ -1,1 +1,1 @@
-![doxcollege](https://github.com/chauhansumitdev/doxcollege/assets/103536827/043133a2-1284-46c0-8fa9-98da574660b9)
+![dox](https://github.com/pawanmkr/doxcollege/assets/103536827/6ca68c4f-4942-4444-b841-d768f326b106)
