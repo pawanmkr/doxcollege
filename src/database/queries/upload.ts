@@ -1,5 +1,5 @@
 import { QueryResultRow } from "pg";
-import client from "../config/db.js";
+import client from "../../config/db.js";
 
 export class Upload {
   static async createUploadTable(): Promise<void> {

@@ -1,7 +1,7 @@
-import { Comment } from "../queries/comment.model.js";
-import { Document } from "../queries/document.js";
-import { Upload } from "../queries/upload.js";
-import { User } from "../queries/user.js";
+import { Comment } from "../database/queries/comment.model.js";
+import { Document } from "../database/queries/document.js";
+import { Upload } from "../database/queries/upload.js";
+import { User } from "../database/queries/user.js";
 
 export class Tables {
   static async createTables() {

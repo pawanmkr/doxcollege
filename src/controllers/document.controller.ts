@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-import { Document, PostNotFoundError } from "../queries/index.js";
+import { Document, PostNotFoundError } from "../database/queries/index.js";
 import { AuthenticatedRequest } from "../middlewares/auth.js";
 import { uploadFile } from "../services/storage.js";
-import { Upload } from "../queries/upload.js";
+import { Upload } from "../database/queries/upload.js";
 
 export class DocumentController {
   static async createNewDocument(req: AuthenticatedRequest, res: Response, next: NextFunction) {
@@ -16,6 +16,9 @@ export class DocumentController {
 
     const { title, description, price, year } = req.body;
     const document = await Document.addDocument(title, description, year, price, req.user.userId);
+    if (!document) {
+      return res.send(500);
+    }
 
     for (const result of results) {
       await Upload.addUpload(result.name, result.url, result.mimetype, document.id);

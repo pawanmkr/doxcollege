@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { User } from "../queries/user.js";
+import { User } from "../database/queries/user.js";
 import dotenv from "dotenv";
 import path from "path";
 import jwt, { Secret, JwtPayload } from "jsonwebtoken";
 import crypto from "crypto";
-import { QueryResultRow } from "pg";
+import { Query, QueryResultRow } from "pg";
 
 dotenv.config({
   path: path.join(process.cwd(), ".env"),
@@ -90,5 +90,19 @@ export class UserController {
     res.status(201).json({
       token: token,
     });
+  }
+
+  static async getUserProfile(req, res) {
+    const id = req.params.id;
+    if (!id) {
+      return res.sendStatus(400).send("Invalid Request, UserID not specified");
+    }
+
+    let user = await User.getProfile(id);
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+
+    return res.send(user);
   }
 }

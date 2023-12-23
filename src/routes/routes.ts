@@ -9,6 +9,8 @@ export const router: Router = Router();
 router.post("/user/register", UserController.registerNewUser);
 router.post("/user/login", UserController.login);
 
+router.get('/user/:id', UserController.getUserProfile);
+
 router.post("/docs/upload", authorization, upload.array('files', 10), DocumentController.createNewDocument);
 
 router.get("/docs", DocumentController.getAllDocuments)

@@ -11,7 +11,7 @@ export class PostNotFoundError extends Error {
 export class Document {
   static async createDocumentTable(): Promise<void> {
     const query = `
-      CREATE TABLE 
+      CREATE TABLE
         IF NOT EXISTS document (
           id SERIAL PRIMARY KEY,
           title VARCHAR(40),
@@ -48,17 +48,17 @@ export class Document {
     year: number,
     price: number,
     created_by: number
-  ): Promise<number | undefined> {
+  ): Promise<QueryResultRow> {
     try {
       const query = `
         INSERT INTO document (title, description, year, price, created_by)
         VALUES ($1, $2, $3, $4, $5)
-        RETURNING id;
+        RETURNING *;
       `;
       const values = [title, description, year, price, created_by];
 
       const { rows } = await client.query(query, values);
-      return rows[0].id;
+      return rows[0];
     } catch (error) {
       console.error("Error adding document:", error);
     }

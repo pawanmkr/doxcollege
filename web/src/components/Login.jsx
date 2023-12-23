@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { loginUser } from '../services/apiService';
 
@@ -15,9 +15,11 @@ const Login = () => {
     e.preventDefault();
 
     try {
+      console.log(formData)
       const response = await loginUser(formData);
 
       if (response.status === 201) {
+        console.log(response)
         const { token } = response.data;
         setToken(token);
         console.log("success");
