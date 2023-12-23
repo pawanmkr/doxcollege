@@ -71,6 +71,16 @@ export class DocumentController {
     res.json(docs);
   }
 
+  static async searchDocuments(req: Request, res: Response) {
+    const { query } = req.query;
+    if (!query) {
+      return res.sendStatus(404);
+    }
+
+    const docs = await Document.searchDocuments(query as string);
+    return res.send(docs);
+  }
+
   static async getDocumentById(req: Request, res: Response, next: NextFunction) {
     const id = parseInt(req.params.id);
     const doc = await Document.getDocumentById(id);

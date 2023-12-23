@@ -121,6 +121,13 @@ export class Document {
     return rows[0];
   }
 
+  static async searchDocuments(query: string): Promise<QueryResultRow[]> {
+    const { rows } = await client.query(`
+      SELECT * FROM document WHERE title LIKE $1 OR description LIKE $1;
+    `, [`%${query}%`]);
+    return rows;
+  }
+
   static async getDocuments(
     page: number,
     limit: number,
