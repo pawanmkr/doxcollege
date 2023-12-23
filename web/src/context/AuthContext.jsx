@@ -11,9 +11,12 @@ const getCookie = (name) => {
 };
 
 export const AuthProvider = ({ children }) => {
+  // Initialize userId from cookies
+  const initialUserId = getCookie('userId') || null;
+
   const initialState = {
     token: getCookie('jwtToken') || null,
-    userId: null,
+    userId: initialUserId,
   };
 
   const [state, dispatch] = useReducer((state, action) => {
@@ -23,17 +26,22 @@ export const AuthProvider = ({ children }) => {
         const payloadBase64 = payload.split(".")[1];
         const parsedID = JSON.parse(atob(payloadBase64));
         const userId = parsedID.userId;
+
         document.cookie = `jwtToken=${encodeURIComponent(payload)};max-age=${5 * 60};path=/`;
+        document.cookie = `userId=${encodeURIComponent(userId)};max-age=${5 * 60};path=/`;
+
         return { ...state, token: action.payload, userId };
       case 'CLEAR_TOKEN':
         document.cookie = 'jwtToken=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+        document.cookie = 'userId=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+
         return { ...state, token: null, userId: null };
       default:
         return state;
     }
   }, initialState);
+ 
 
-  
 
   const setToken = (newToken) => {
     dispatch({ type: 'SET_TOKEN', payload: newToken });
