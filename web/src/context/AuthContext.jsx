@@ -1,10 +1,18 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useReducer} from 'react';
 
 const AuthContext = createContext();
 
+const getCookie = (name) => {
+  const cookieValue = document.cookie
+    .split('; ')
+    .find((row) => row.startsWith(name))
+    ?.split('=')[1];
+  return cookieValue ? decodeURIComponent(cookieValue) : null;
+};
+
 export const AuthProvider = ({ children }) => {
   const initialState = {
-    token: null,
+    token: getCookie('jwtToken') || null,
     userId: null,
   };
 
@@ -15,13 +23,18 @@ export const AuthProvider = ({ children }) => {
         const payloadBase64 = payload.split(".")[1];
         const parsedID = JSON.parse(atob(payloadBase64));
         const userId = parsedID.userId;
+        // Set the cookie when the token is set
+        document.cookie = `jwtToken=${encodeURIComponent(payload)};max-age=${7 * 24 * 60 * 60};path=/`;
         return { ...state, token: action.payload, userId };
       case 'CLEAR_TOKEN':
+        // Clear the cookie when the token is cleared
+        document.cookie = 'jwtToken=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
         return { ...state, token: null, userId: null };
       default:
         return state;
     }
   }, initialState);
+
 
   const setToken = (newToken) => {
     dispatch({ type: 'SET_TOKEN', payload: newToken });
