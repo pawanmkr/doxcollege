@@ -35,8 +35,11 @@ const Login = () => {
         setMessage('Email or password is wrong, please try again.');
       }
     } catch (error) {
-      setMessage('User not found, register to create a new account.');
-      console.error('Error during login:', error);
+      if (error.response?.data) {
+        setMessage(error.response.data);
+      } else {
+        setMessage('An error occurred during signup. Please try again later.');
+      }
     }
   };
 

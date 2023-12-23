@@ -11,7 +11,6 @@ const getCookie = (name) => {
 };
 
 export const AuthProvider = ({ children }) => {
-  // Initialize userId from cookies
   const initialUserId = getCookie('userId') || null;
 
   const initialState = {

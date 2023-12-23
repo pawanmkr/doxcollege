@@ -5,6 +5,7 @@ import Upload from '../components/Upload';
 import Login from '../components/Login';
 import DocumentDetails from '../components/DocumentDetails'; 
 import Profile from '../components/Profile';
+import Signup from '../components/Signup';
 
 
 
@@ -15,6 +16,7 @@ const AppRoutes = () => {
             <Route path='/upload' exact element={<Upload />} />
             <Route path='/profile' exact element={<Profile />} />
             <Route path='/login' exact element={<Login />} />
+            <Route path='/signup' exact element={<Signup />} />
             <Route path="/document/:id" element={<DocumentDetails />} />
             <Route path='*' element={<Error />} />
         </Routes>
