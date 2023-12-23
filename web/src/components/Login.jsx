@@ -20,11 +20,11 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      console.log(formData)
+      console.log(formData)   // for testing purposes
       const response = await loginUser(formData);
 
       if (response.status === 201) {
-        console.log(response)
+        console.log(response)   // for testing purposes
         const { token } = response.data;
         setToken(token);
         setMessage('Login Success! Redirecting to home page');

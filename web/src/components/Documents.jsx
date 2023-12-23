@@ -35,7 +35,6 @@ export default function Documents() {
             <div className="document-list list">
               {documents.map((document) => (
                 <div key={document.id}>
-                  {/* Use Link to navigate to the detailed page */}
                   <Link to={`/document/${document.id}`}>
                     <Document
                       title={document.title}
