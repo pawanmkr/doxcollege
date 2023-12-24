@@ -50,7 +50,7 @@ const DocumentDetails = () => {
           <button><FaCartPlus/></button>
           <br />
           <br />
-          {userId === documentDetails.created_by ? <strong style={{ color: "red" }}>Edit</strong> : ""}
+          {userId == documentDetails.created_by ? <strong style={{ color: "red" }}>Edit</strong> : ""}
         </>
       )}
     </div>

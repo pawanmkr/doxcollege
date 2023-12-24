@@ -8,7 +8,7 @@ const Document = ({ id, title, year, price, created_by }) => {
     <div className="document">
       <p>
         {title}
-        {userId === created_by ? <strong style={{ color: "red" }}>Edit</strong> : ""}
+        { created_by == userId ? <strong style={{ color: "red" }}>Edit</strong> : ""}
       </p>
       <p>{year}</p>
       <p>{price}</p>

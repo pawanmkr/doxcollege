@@ -1,20 +1,12 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useReducer, useEffect } from 'react';
 
 const AuthContext = createContext();
 
-const getCookie = (name) => {
-  const cookieValue = document.cookie
-    .split('; ')
-    .find((row) => row.startsWith(name))
-    ?.split('=')[1];
-  return cookieValue ? decodeURIComponent(cookieValue) : null;
-};
-
 export const AuthProvider = ({ children }) => {
-  const initialUserId = getCookie('userId') || null;
+  const initialUserId = localStorage.getItem('userId') || null;
 
   const initialState = {
-    token: getCookie('jwtToken') || null,
+    token: localStorage.getItem('jwtToken') || null,
     userId: initialUserId,
   };
 
@@ -26,21 +18,23 @@ export const AuthProvider = ({ children }) => {
         const parsedID = JSON.parse(atob(payloadBase64));
         const userId = parsedID.userId;
 
-        document.cookie = `jwtToken=${encodeURIComponent(payload)};max-age=${5 * 60};path=/`;
-        document.cookie = `userId=${encodeURIComponent(userId)};max-age=${5 * 60};path=/`;
+        localStorage.setItem('jwtToken', payload);
+        localStorage.setItem('userId', userId);
 
         return { ...state, token: action.payload, userId };
       case 'CLEAR_TOKEN':
-        document.cookie = 'jwtToken=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
-        document.cookie = 'userId=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;';
+        localStorage.removeItem('jwtToken');
+        localStorage.removeItem('userId');
 
         return { ...state, token: null, userId: null };
       default:
         return state;
     }
   }, initialState);
- 
 
+  useEffect(() => {
+    // You can add any side effect related to the token change here if needed
+  }, [state.token]);
 
   const setToken = (newToken) => {
     dispatch({ type: 'SET_TOKEN', payload: newToken });
