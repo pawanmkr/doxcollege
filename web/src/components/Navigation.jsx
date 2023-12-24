@@ -1,6 +1,5 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
-import { useAuth, } from '../context/AuthContext';
+import { useAuth } from '../context/AuthContext';
 import Search from './Search';
 
 const Navbar = () => {
@@ -18,7 +17,7 @@ const Navbar = () => {
           <>
             <Link to={'/profile'} className='nav-item'> <strong>Profile</strong> </Link>
             <Link to={'/upload'} className='nav-item'> <strong>Upload</strong> </Link>
-            <Link to={'/'} className='nav-item'  onClick={handleLogout}> <strong>Logout</strong> </Link>
+            <Link to={'/'} className='nav-item' onClick={handleLogout}> <strong>Logout</strong> </Link>
           </>
         ) : (
           <>

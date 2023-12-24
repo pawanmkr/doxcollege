@@ -4,15 +4,15 @@
   border: 2px solid rgb(0, 0, 0);
   padding: 10px;
 }
-a{
-  text-decoration: none;
-}
+
 .navigations {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #ad55ff;
   padding: 10px 10px;
+  position: fixed;
+  width: 100%;
 }
 .navigations .nav-menus .nav-item {
   margin: 0 20px;
@@ -27,9 +27,10 @@ a{
 .documents-container {
   display: grid;
   grid-template-columns: 70% 30%;
+  padding-top: 60px;
 }
 .documents-container .documents {
-  margin: 30px 0 0 30px;
+  margin: 30px 0 30px 30px;
   border: 1px solid gainsboro;
 }
 .documents-container .document-list-title {
@@ -66,11 +67,50 @@ a{
 .upload-form {
   background-color: #ffca52;
   padding: 20px;
+  margin: 30px 0 0 0;
   display: flex;
   flex-direction: column;
-  margin: 30px;
+  height: -moz-max-content;
+  height: max-content;
+  position: fixed;
+  right: 30px;
+}
+.upload-form .warning-msg {
+  color: red;
+  margin: 0 0 20px 0;
 }
 .upload-form input {
   padding: 5px;
   margin: 5px;
+}
+
+.footer {
+  background-color: #ad55ff;
+  text-align: center;
+  color: black;
+}
+.footer .footer-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+.footer .footer-content .nav-links a {
+  color: inherit;
+  text-decoration: none;
+  margin-right: 3rem;
+}
+.footer .footer-content .nav-links a:hover {
+  color: #111;
+}
+.footer .footer-content .copyright {
+  color: white;
+}
+@media (min-width: 768px) {
+  .footer {
+    /* Adjust for larger screens */
+    padding: 3rem 0;
+    font-size: 16px;
+  }
 }/*# sourceMappingURL=style.css.map */

@@ -27,7 +27,7 @@ const Upload = () => {
     e.preventDefault();
 
     if (!token) {
-      setMessage('User is not authenticated. Please log in to upload documents.');
+      setMessage('* Please log in to upload documents.');
       return;
     }
 
@@ -39,9 +39,9 @@ const Upload = () => {
     };
 
     try {
-      const response = await uploadDocument(formData, config);
+      await uploadDocument(formData, config);
       setMessage('Document uploaded successfully!');
-      
+
       // Reset the form after successful upload
       setFormData({
         title: '',
@@ -56,21 +56,22 @@ const Upload = () => {
   };
 
   return (
-    <div>
-      {message && <p>{message}</p>}
-      <form className="upload-form" onSubmit={handleSubmit}>
-        <label>Title</label>
-        <input type="text" name="title" value={formData.title} onChange={handleChange} />
-        <label>Description</label>
-        <input type="text" name="description" value={formData.description} onChange={handleChange} />
-        <label>Year</label>
-        <input type="text" name="year" value={formData.year} onChange={handleChange} />
-        <label>Price</label>
-        <input type="text" name="price" value={formData.price} onChange={handleChange} />
-        <input type="file" name="files"/>
-        <button type="submit">Upload</button>
-      </form>
-    </div>
+    <form className="upload-form" onSubmit={handleSubmit}>
+      {message && (
+        <p className="warning-msg">{message}</p>
+      )}
+      <label>Title</label>
+      <input type="text" name="title" value={formData.title} onChange={handleChange} />
+      <label>Description</label>
+      <input type="text" name="description" value={formData.description} onChange={handleChange} />
+      <label>Year</label>
+      <input type="text" name="year" value={formData.year} onChange={handleChange} />
+      <label>Price</label>
+      <input type="text" name="price" value={formData.price} onChange={handleChange} />
+      <input type="file" name="files" />
+      <button type="submit" className="submit-btn">Upload</button>
+    </form>
+
   );
 };
 

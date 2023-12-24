@@ -1,6 +1,7 @@
 import Navigation from "./components/Navigation";
 import AppRoutes from '../src/router/routesConfig';
 import { DocumentContextProvider } from "./context/DocumentContext";
+import Footer from "./components/Footer";
 
 const App = () => {
   return (
@@ -8,6 +9,7 @@ const App = () => {
       <div className="screen">
         <Navigation />
         <AppRoutes />
+        <Footer />
       </div>
     </DocumentContextProvider>
   );

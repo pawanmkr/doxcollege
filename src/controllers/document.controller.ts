@@ -58,7 +58,7 @@ export class DocumentController {
   static async getAllDocuments(req: Request, res: Response, next: NextFunction) {
     const {
       page = 1,
-      limit = 10,
+      limit = 50,
       sortBy = "created_at",
       sortDir = "desc",
     } = req.query;
