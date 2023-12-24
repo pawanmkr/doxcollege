@@ -12,5 +12,6 @@ export const getAllDocuments = () => apiService.get('/docs');
 export const getDocumentById = (documentId) => apiService.get(`/docs/${documentId}`);
 export const editDocument = (documentId, newData) => apiService.patch(`/docs/${documentId}`, newData);
 export const deleteDocument = (documentId) => apiService.delete(`/docs/${documentId}`);
+export const searchDocument = (query) => apiService.get(`/docs/search?query=${query}`)
 
 export const getProfile = (userId) => apiService.get(`/user/${userId}`);

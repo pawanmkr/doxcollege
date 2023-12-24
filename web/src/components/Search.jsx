@@ -1,7 +1,11 @@
 import { useState } from "react";
+import { searchDocument } from "../services/apiService";
+import { useContext } from "react";
+import { DocumentContext } from "../context/DocumentContext";
 
 const Search = () => {
   const [query, setQuery] = useState("");
+  const { setDocuments } = useContext(DocumentContext);
 
   return (
     <>
@@ -10,10 +14,11 @@ const Search = () => {
           className="search-bar"
           type="text"
           placeholder="Search for any document..."
-          onKeyDown={(e) => {
+          onKeyDown={async (e) => {
             if (e.key === 'Enter') {
-              // call api for search
-              console.log("Searching for " + query);
+              const { data } = await searchDocument(query);
+              console.log(data)
+              setDocuments(data);
             }
           }}
           onChange={(e) => {
