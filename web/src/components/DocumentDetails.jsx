@@ -46,7 +46,7 @@ const DocumentDetails = () => {
           <p>Title: {documentDetails.title}</p>
           <p>Description : {documentDetails.description}</p>
           <p>Year: {documentDetails.year}</p>
-          <p>Price: {documentDetails.price !== 0 ? "${documentDetails.price}Rs"  : <strong style={{ color: "green" }}>Free</strong>}</p>
+          <p>Price: {documentDetails.price !== 0 ? `${documentDetails.price}Rs`  : <strong style={{ color: "green" }}>Free</strong>}</p>
           <button><FaCartPlus/></button>
           <br />
           <br />
