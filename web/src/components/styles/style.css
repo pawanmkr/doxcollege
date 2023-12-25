@@ -4,7 +4,10 @@
   border: 2px solid rgb(0, 0, 0);
   padding: 10px;
 }
-
+.buffer{ /** added for testing only purposes*/
+  width:200px;
+  height: 100px;
+}
 .navigations {
   display: flex;
   justify-content: space-between;

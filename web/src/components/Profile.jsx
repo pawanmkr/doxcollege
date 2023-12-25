@@ -23,6 +23,7 @@ const Profile = () => {
 
   return (
     <div className="document-list list">
+      <div className="buffer"></div>  { /**dummy div just for tesing purposes */}
       {userId === null? <p>Login to continue.</p>:"" }
       {documents === null ? (
         <p> <strong>You have uploaded no documents.</strong></p>
