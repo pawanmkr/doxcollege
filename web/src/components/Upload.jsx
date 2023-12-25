@@ -25,23 +25,33 @@ const Upload = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (!token) {
       setMessage('* Please log in to upload documents.');
       return;
     }
-
+  
+    // Show a confirmation dialog
+    const confirmUpload = window.confirm(
+      'By uploading this document, you agree not to include sensitive or personal information. Do you want to proceed?'
+    );
+  
+    if (!confirmUpload) {
+      setMessage('Upload canceled.');
+      return;
+    }
+  
     const config = {
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${token}`,
       },
     };
-
+  
     try {
       await uploadDocument(formData, config);
       setMessage('Document uploaded successfully!');
-
+  
       // Reset the form after successful upload
       setFormData({
         title: '',
@@ -49,7 +59,6 @@ const Upload = () => {
         year: '',
         price: '',
       });
-
     } catch (error) {
       setMessage('Error uploading document. Please try again.');
     }
