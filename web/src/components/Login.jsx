@@ -20,15 +20,13 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      console.log(formData)   // for testing purposes
       const response = await loginUser(formData);
 
       if (response.status === 201) {
-        console.log(response)   // for testing purposes
         const { token } = response.data;
         setToken(token);
         setMessage('Login Success! Redirecting to home page');
-        setTimeout(() => {  // dummy timer just for testing purposes...
+        setTimeout(() => { 
           navigate('/');
         }, 2000);
       } else {
@@ -53,6 +51,7 @@ const Login = () => {
 
   return (
     <div>
+      <div className="buffer"></div>
       <h2>Login</h2>
       <br />
       {message && <p>{message}</p>}

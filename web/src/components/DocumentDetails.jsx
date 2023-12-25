@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { getDocumentById } from '../services/apiService';
-import { FaCartPlus } from "react-icons/fa";
+import { FaCartPlus } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
-
 
 const DocumentDetails = () => {
   const { id } = useParams();
@@ -11,7 +10,6 @@ const DocumentDetails = () => {
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
   const { userId } = useAuth();
-
 
   useEffect(() => {
     const fetchDocumentDetails = async () => {
@@ -34,23 +32,34 @@ const DocumentDetails = () => {
     };
 
     fetchDocumentDetails();
-  }, [id]); 
+  }, [id]);
 
   return (
     <div>
+      <div className="buffer"></div>
       {loading && <p>Loading...</p>}
       {errorMessage && <p>{errorMessage}</p>}
       {!loading && !errorMessage && (
         <>
           <h2>Document Details for Document ID: {id}</h2>
           <p>Title: {documentDetails.title}</p>
-          <p>Description : {documentDetails.description}</p>
+          <p>Description: {documentDetails.description}</p>
           <p>Year: {documentDetails.year}</p>
-          <p>Price: {documentDetails.price !== 0 ? `${documentDetails.price}Rs`  : <strong style={{ color: "green" }}>Free</strong>}</p>
-          <button><FaCartPlus/></button>
+          <p>
+            Price: {documentDetails.price !== 0 ? `${documentDetails.price}Rs` : <strong style={{ color: 'green' }}>Free</strong>}
+          </p>
+          <button>
+            <FaCartPlus />
+          </button>
           <br />
           <br />
-          {userId == documentDetails.created_by ? <strong style={{ color: "red" }}>Edit</strong> : ""}
+          {userId == documentDetails.created_by ? (
+            <Link to={`/edit-document/${id}`} style={{ color: 'red' }}>
+              Edit
+            </Link>
+          ) : (
+            ''
+          )}
         </>
       )}
     </div>
@@ -58,5 +67,3 @@ const DocumentDetails = () => {
 };
 
 export default DocumentDetails;
-
-
