@@ -31,7 +31,6 @@ const Upload = () => {
       return;
     }
   
-    // Show a confirmation dialog
     const confirmUpload = window.confirm(
       'By uploading this document, you agree not to include sensitive or personal information. Do you want to proceed?'
     );
@@ -52,13 +51,13 @@ const Upload = () => {
       await uploadDocument(formData, config);
       setMessage('Document uploaded successfully!');
   
-      // Reset the form after successful upload
       setFormData({
         title: '',
         description: '',
         year: '',
         price: '',
       });
+      window.location.reload();
     } catch (error) {
       setMessage('Error uploading document. Please try again.');
     }
