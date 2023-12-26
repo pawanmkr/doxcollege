@@ -51,7 +51,8 @@ const DocumentDetails = () => {
 
   const handleReportFormSubmit = async (e) => {
     e.preventDefault();
-
+    setErrorMessage('Document Reported');
+    console.log(reportFormData);
     // try {
       // might require an api for reporting.
     //   await reportDocument(id, reportFormData);
@@ -87,7 +88,7 @@ const DocumentDetails = () => {
           </p>
           <button onClick={handleReportButtonClick}>Report</button>
           <button>
-            <FaCartPlus />
+              Add to Cart
           </button>
           <br />
           <br />
@@ -131,7 +132,6 @@ const DocumentDetails = () => {
                   onChange={(e) =>
                     setReportFormData({ ...reportFormData, proofs: e.target.value })
                   }
-                  required
                 />
               </label>
               <button type="submit">Submit Report</button>
