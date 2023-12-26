@@ -42,8 +42,7 @@ const DocumentDetails = () => {
       {errorMessage && <p>{errorMessage}</p>}
       {!loading && !errorMessage && (
         <>
-          <h2>Document Details for Document ID: {id}</h2>
-          <p>Title: {documentDetails.title}</p>
+          <h2>Title: {documentDetails.title}</h2>
           <p>Description : {documentDetails.description}</p>
           <p>Year: {documentDetails.year}</p>
           <p>Price: {documentDetails.price !== 0 ? `${documentDetails.price}Rs`  : <strong style={{ color: "green" }}>Free</strong>}</p>
