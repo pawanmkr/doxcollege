@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getDocumentById } from '../services/apiService';
-import { FaCartPlus } from 'react-icons/fa';
 import { useAuth } from '../context/AuthContext';
 
 const DocumentDetails = () => {
