@@ -50,6 +50,7 @@ const Signup = () => {
 
   return (
     <div>
+      <div className="buffer"></div>
       <h3>Signup</h3>
       <br />
       {message && <p>{message}</p>}
