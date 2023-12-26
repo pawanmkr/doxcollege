@@ -6,6 +6,7 @@ import Login from '../components/Login';
 import DocumentDetails from '../components/DocumentDetails'; 
 import Profile from '../components/Profile';
 import Signup from '../components/Signup';
+import EditDocument from '../components/EditDocument';
 
 
 
@@ -18,6 +19,7 @@ const AppRoutes = () => {
             <Route path='/login' exact element={<Login />} />
             <Route path='/signup' exact element={<Signup />} />
             <Route path="/document/:id" element={<DocumentDetails />} />
+            <Route path="/edit-document/:id" element={<EditDocument />} />
             <Route path='*' element={<Error />} />
         </Routes>
     );
